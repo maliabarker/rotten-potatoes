@@ -5,6 +5,25 @@ const app = express();
 
 var exphbs = require('express-handlebars');
 
+// var hbs = exphbs.create({
+//     // Specify helpers which are only registered on this instance.
+//     helpers: {
+//         select: function(selected, options) {
+//             console.log(selected)
+//             return options.fn(this).replace(
+//                 new RegExp(' value=\"' + selected + '\"'),
+//                 '$& selected="selected"');
+                
+//         }
+//     },
+//     defaultLayout: 'main',
+//     partialsDir: ['views/partials/']
+//   });
+
+// app.engine('handlebars', hbs.engine);
+// app.set('view engine', 'handlebars');
+// app.set('views', path.join(__dirname, 'views'));
+
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/rotten-potatoes', { useNewUrlParser: true });
 
@@ -76,7 +95,7 @@ app.get('/reviews/:id', (req, res) => {
 app.get('/reviews/:id/edit', (req, res) => {
     Review.findById(req.params.id, function(err, review) {
       res.render('reviews-edit', {review: review, title: "Edit Review"});
-    });
+    }).lean();
 });
 
 // UPDATE
@@ -88,6 +107,16 @@ app.put('/reviews/:id', (req, res) => {
       .catch(err => {
         console.log(err.message)
       });
+});
+
+// DELETE
+app.delete('/reviews/:id', function (req, res) {
+    console.log("DELETE review")
+    Review.findByIdAndRemove(req.params.id).then((review) => {
+      res.redirect('/');
+    }).catch((err) => {
+      console.log(err.message);
+    });
 });
 
 // reviews (index) route
