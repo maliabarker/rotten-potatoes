@@ -1,38 +1,15 @@
 <!-- views/reviews-edit.handlebars -->
 
-{{!-- <form method="POST" action="/reviews/{{review._id}}?_method=PUT">
-  <fieldset>
-    <legend>Edit Review</legend>
-    <!-- TITLE -->
-    <p>
-      <label for="review-title">Title</label><br>
-      <input id="review-title" type="text" name="title" value="{{review.title}}"/>
-    </p>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <form method="POST" action="/reviews/{{review._id}}?_method=PUT">
+      {{> reviews-form}}
+      <!-- BUTTON -->
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Save Review</button>
+      </div>
+    </form>
+    <a href="/"><button>Cancel</button></a>
+  </div>
+</div>
 
-    <!-- MOVIE TITLE -->
-    <p>
-      <label for="movie-title">Movie Title</label><br>
-      <input id="movie-title" type="text" name="movieTitle" value="{{review.movieTitle}}" />
-    </p>
-
-    <!-- DESCRIPTION -->
-    <p>
-      <label for="review-description">Description</label><br>
-      <textarea id="review-description" name="description" rows="10" />{{review.description}}</textarea>
-    </p>
-  </fieldset>
-  <!-- BUTTON -->
-  <p>
-    <button type="submit">Save Review</button>
-  </p>
-</form> --}}
-
-<form method="POST" action="/reviews/{{review._id}}?_method=PUT">
-  {{> reviews-form}}
-  <!-- BUTTON -->
-  <p>
-    <button type="submit">Save Review</button>
-  </p>
-</form>
-
-<a href="/"><button>Cancel</button></a>

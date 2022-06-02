@@ -1,39 +1,35 @@
 <!-- views/partials/reviews-form.handlebars -->
-
 <fieldset>
-    <legend>{{title}}</legend>
-    <!-- TITLE -->
-    <p>
-        <label for="review-title">Title</label><br>
-        <input id="review-title" type="text" name="title" value="{{review.title}}"/>
-    </p>
+  <legend>{{title}}</legend>
+  <!-- TITLE -->
+  <div class="form-group">
+    <label for="review-title">Title</label><br>
+    <input class="form-control" id="review-title" type="text" name="title" value="{{review.title}}"/>
+  </div>
 
-    <!-- MOVIE TITLE -->
-    <p>
-        <label for="movie-title">Movie Title</label><br>
-        <input id="movie-title" type="text" name="movieTitle" value="{{review.movieTitle}}"/>
-    </p>
+  <!-- MOVIE TITLE -->
+  <div class="form-group">
+    <label for="movie-title">Movie Title</label><br>
+    <input class="form-control" id="movie-title" type="text" name="movieTitle" value="{{review.movieTitle}}" />
+  </div>
 
-    <!-- DESCRIPTION -->
-    <p>
-        <label for="description-text">Description</label><br>
-        <textarea id="description-text" name="description" rows="10" />{{review.description}}</textarea>
-    </p>
+  <!-- DESCRIPTION -->
+  <div class="form-group">
+    <label for="review-description">Description</label><br>
+    <textarea class="form-control" id="review-description" name="description" rows="10" />{{review.description}}</textarea>
+  </div>
 
-    <!-- RATING -->
-    <p>
-        <label for="rating-text">Rating</label><br>
-        <select id="rating-text" name="movieRating" value="{{review.movieRating}}">
-            {{!-- {{#select CurrentSort}} --}}
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            {{!-- {{/select}} --}}
-        </select>
-        {{!-- <input type="range" id="rating-text" name="movieRating" min="0" max="5" oninput="this.nextElementSibling.value = this.value">
-        <output>3</output> --}}
-    </p>
+  <div class="form-group">
+    <label for="rating-text">Rating</label><br>
+    <select id="rating-text" name="movieRating" value="{{review.movieRating}}">
+        {{!-- {{#select CurrentSort}} --}}
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        {{!-- {{/select}} --}}
+    </select>
+  </div>
 </fieldset>
