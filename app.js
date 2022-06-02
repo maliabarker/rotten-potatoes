@@ -5,21 +5,6 @@ const app = express();
 
 var exphbs = require('express-handlebars');
 
-// var hbs = exphbs.create({
-//     // Specify helpers which are only registered on this instance.
-//     helpers: {
-//         select: function(selected, options) {
-//             console.log(selected)
-//             return options.fn(this).replace(
-//                 new RegExp(' value=\"' + selected + '\"'),
-//                 '$& selected="selected"');
-                
-//         }
-//     },
-//     defaultLayout: 'main',
-//     partialsDir: ['views/partials/']
-//   });
-
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -30,6 +15,9 @@ app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 const reviews = require('./controllers/reviews')(app);
+
+module.exports = app;
+
 
 // let reviews = [
 //     { title: "Great Review", movieTitle: "Batman II" },
