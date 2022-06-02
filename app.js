@@ -10,7 +10,8 @@ mongoose.connect('mongodb://localhost/rotten-potatoes', { useNewUrlParser: true 
 const Review = mongoose.model('Review', {
     title: String,
     description: String,
-    movieTitle: String
+    movieTitle: String,
+    movieRating: Number
 });
 
 const bodyParser = require("body-parser");
