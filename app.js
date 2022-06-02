@@ -1,6 +1,7 @@
 // app.js
-const express = require('express')
-const app = express()
+const express = require('express');
+const methodOverride = require('method-override');
+const app = express();
 
 var exphbs = require('express-handlebars');
 
@@ -16,6 +17,9 @@ const Review = mongoose.model('Review', {
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// override with POST having ?_method=DELETE or ?_method=PUT
+app.use(methodOverride('_method'))
 
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
@@ -46,7 +50,7 @@ app.get('/', (req, res) => {
 
 // NEW REVIEW
 app.get('/reviews/new', (req, res) => {
-    res.render('reviews-new', {});
+    res.render('reviews-new', {title: "New Review"});
 })
 
 // CREATE
@@ -66,6 +70,24 @@ app.get('/reviews/:id', (req, res) => {
     }).catch((err) => {
       console.log(err.message);
     });
+});
+
+// EDIT
+app.get('/reviews/:id/edit', (req, res) => {
+    Review.findById(req.params.id, function(err, review) {
+      res.render('reviews-edit', {review: review, title: "Edit Review"});
+    });
+});
+
+// UPDATE
+app.put('/reviews/:id', (req, res) => {
+    Review.findByIdAndUpdate(req.params.id, req.body)
+      .then(review => {
+        res.redirect(`/reviews/${review._id}`)
+      })
+      .catch(err => {
+        console.log(err.message)
+      });
 });
 
 // reviews (index) route
