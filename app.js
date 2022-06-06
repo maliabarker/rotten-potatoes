@@ -19,6 +19,20 @@ const comments = require('./controllers/comments')(app);
 
 module.exports = app;
 
+const mongoose = require('mongoose');
+
+const uri = "mongodb+srv://maliabarker:supersecretpassword@cluster0.mnou0t0.mongodb.net/?retryWrites=true&w=majority";
+try {
+    // Connect to the MongoDB cluster
+     mongoose.connect(
+      uri,
+      { useNewUrlParser: true, useUnifiedTopology: true },
+      () => console.log(" Mongoose is connected")
+    );
+
+  } catch (e) {
+    console.log("could not connect");
+}
 
 // let reviews = [
 //     { title: "Great Review", movieTitle: "Batman II" },
