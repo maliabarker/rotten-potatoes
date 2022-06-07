@@ -12,7 +12,7 @@ module.exports = function(app) {
             moviedb.genreMovieList().then(genres => {
                 // console.log(genres.genres)
                 // console.log(movies)
-
+                // MAPPING GENRES TO MOVIES
                 movies.results.forEach(function (movie) {
                     // console.log(movie.genre_ids);
                     movie_genres = []
@@ -21,25 +21,31 @@ module.exports = function(app) {
                             // console.log(genre)
                             if (movie_genre == genre.id){
                                 // console.log(movie_genre)
-                                movie_genres.push(genre.name)
-                            }
-                        })
-                    })
-                    // console.log(movie.title)
-                    // console.log(movie_genres)
-                    movie['genres_str'] = movie_genres
+                                movie_genres.push(genre.name);
+                            };
+                        });
+                    });
+                    movie['genres_str'] = movie_genres;
                     // console.log(movie)
                 });
-
-
                 res.render('movies-index', { movies: movies.results, genres: genres.genres });
             });
         }).catch(console.error);
-
-        // moviedb.genreMovieList().then(response => {
-        //     res.render('movies-index', { genres: response.results });
-        //     console.log(response.results)
-        // }).catch(console.error);
     });  
-  
+    
+    app.get('/movies/:id', (req, res) => {
+        moviedb.movieInfo({ id: req.params.id }).then(movie => {
+          moviedb.movieVideos({ id: req.params.id }).then(videos => {
+            // console.log(videos.results[0])
+            movie.trailer_youtube_id = videos.results[0].key
+            // console.log('VIDEOS.TRAILER_YOUTUBE_ID', movie.trailer_youtube_id);
+            moviedb.movieSimilar({ id: req.params.id }).then(similar_vids => {
+                // console.log(similar_vids.results.slice(0, 3))
+                movie.similar_vids = similar_vids.results.slice(0, 3)
+                // console.log(movie.similar_vids)
+                res.render('movies-show', { movie: movie});
+            }).catch(console.error);
+          }).catch(console.error);
+        }).catch(console.error);
+    });
   }
