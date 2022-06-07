@@ -7,15 +7,15 @@ const moment = require('moment');
 
 module.exports = function(app) {
 
-    app.get('/', (req, res) => {
-      Review.find().lean()
-        .then(reviews => {
-          res.render('reviews-index', {reviews: reviews});
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    });
+    // app.get('/', (req, res) => {
+    //   Review.find().lean()
+    //     .then(reviews => {
+    //       res.render('reviews-index', {reviews: reviews});
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // });
 
     // NEW REVIEW
     app.get('/reviews/new', (req, res) => {
