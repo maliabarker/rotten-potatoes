@@ -11,7 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // override with POST having ?_method=DELETE or ?_method=PUT
 app.use(methodOverride('_method'))
 
-app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }));
+app.engine('handlebars', exphbs.engine({ defaultLayout: 'main',
+                                         helpers: require('./config/handlebars-helpers') }));
 app.set('view engine', 'handlebars');
 
 const reviews = require('./controllers/reviews')(app);
