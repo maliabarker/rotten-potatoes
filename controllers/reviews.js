@@ -37,9 +37,10 @@ module.exports = function(app) {
             let createdAt = review.createdAt;
             createdAt = moment(createdAt).format('MMMM Do YYYY, h:mm a');
             review.createdAtFormatted = createdAt;
-            console.log(createdAt)
+            // console.log(createdAt)
         // fetch its comments
         Comment.find({ reviewId: req.params.id }).lean().then(comments => {
+            comments.reverse();
             // respond with the template with both values
             res.render('reviews-show', { review: review, comments: comments })
         })

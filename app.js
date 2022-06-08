@@ -8,6 +8,12 @@ var exphbs = require('express-handlebars');
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// This tells your app to allow parsing of JSON, which we'll need when we use Axios later
+app.use(bodyParser.json());
+
+// This tells your `Express.js` app to serve all client-side assets in its `public` folder, so that is where we'll put our JavaScript scripts.
+app.use(express.static('public'));
+
 // override with POST having ?_method=DELETE or ?_method=PUT
 app.use(methodOverride('_method'))
 

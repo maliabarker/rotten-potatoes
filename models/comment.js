@@ -8,8 +8,8 @@ const Schema = mongoose.Schema
 const Comment = mongoose.model('Comment', {
     title: String,
     content: String,
-    reviewId: { type: Schema.Types.ObjectId, ref: 'Review' },
-    movieId: { type: String, ref: 'Movie' }
+    reviewId: { type: Schema.Types.ObjectId, ref: 'Review' }
+    // movieId: { type: String, ref: 'Movie' }
 })
 
 // exports the `Comment` object. By doing this you can import `Comment` into any of your other files.
