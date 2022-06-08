@@ -3,10 +3,11 @@
 const mongoose = require('mongoose');
 
 const Review = mongoose.model('Review', new mongoose.Schema({
-    title: String,
-    description: String,
+    movieId: { type: String, required: true },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
     movieTitle: String,
-    movieRating: Number
+    movieRating: { type: Number, required: true }
 }, {
     timestamps: true
 }));

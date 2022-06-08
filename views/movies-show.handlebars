@@ -1,6 +1,10 @@
 <!-- movies-show.handlebars -->
 
 <div class="row">
+    <div class="text-right">
+        <a href="/movies/{{movie.id}}/reviews/new" class="btn btn-primary">New Review</a>
+    </div>
+
     <div class="col-sm-4">
         <img class="img-responsive" src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}"/>
     </div>
@@ -26,4 +30,13 @@
             </div>
         </div>
     {{/each}} 
+</div>
+
+<hr>
+
+<div class="col-sm-12">
+    <h1 class="col-sm-6 col-sm-offset-3">Reviews</h1>
+    {{#each reviews}}
+        {{> review}}
+    {{/each}}
 </div>
